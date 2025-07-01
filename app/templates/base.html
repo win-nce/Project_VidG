@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=   , initial-scale=1.0">
+    <title>GameVault</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header class="">
+    <div class="">
+        <h1 class="">
+            <a href="{% url 'index' %}" class="nav-link">GameVault</a>
+        </h1>
+    <nav>
+        <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white">Каталог</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white"><img src="{% static 'app/images/user.png' %}" alt="Профиль"></a>
+                </li>
+                <li class="nav-item">
+                    <button type="submit" class="nav-link text-white"><img src="{% static 'app/images/logout.png' %}" alt="Выход"></button>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="#" class="nav-link text-white"><img src="{% static 'app/images/user.png' %}" alt="Вход"></a>
+                </li>
+                {% endif %}
+            </ul>
+        </form>
+    </nav>
+</div>
+</header>
+    
+<main>
+    {% block main %}
+    
+    {% endblock main %}
+</main>
+
+
+<footer class="">
+    <p class="">
+        хз нет пока что, что писать то.
+    </p>
+</footer>
+
+
+</body>
+</html>

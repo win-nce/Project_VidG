@@ -37,6 +37,7 @@ class Game(models.Model):
 class Studio(models.Model):
     name = models.CharField(max_length=128, unique=True, verbose_name="Студия разработчик")
     country = models.CharField(max_length=128, blank=True, verbose_name="Страна Разработки")
+    description = models.TextField(blank=True, null=True, verbose_name="Описание студии")
 
     def __str__(self):
         return self.name
@@ -95,14 +96,22 @@ class Review(models.Model):
         verbose_name_plural = "Комментарии"
 
 
+# Жалоба 
+class Report(models.Model):
+    THEME_CHOICES = [
+        ('wrong_info', 'Неверная информация'),
+        ('wrong_studio', 'Неверная студия'),
+        ('wrong_genre', 'Неподходящие жанры'),
+    ]
 
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
+    game = models.ForeignKey('Game', on_delete=models.CASCADE, verbose_name="Игра")
+    theme = models.CharField(max_length=20, choices=THEME_CHOICES, verbose_name="Тема жалобы")
+    description = models.TextField(verbose_name="Описание жалобы", blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
 
-
-
-
-
-
-
+    def __str__(self):
+        return f"Жалоба от {self.user.username} по игре {self.game.name} — {self.get_theme_display()}"
 
 
 
