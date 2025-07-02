@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="game-detail">
+    <h2>{{ game.name }}</h2>
+
+    <div class="game-image">
+        {% if game.image %}
+            <img src="{{ game.image.url }}" alt="{{ game.name }}">
+        {% else %}
+            <img src="{% static 'images/no_image.png' %}" alt="Нет изображения">
+        {% endif %}
+    </div>
+
+    <p class="description">{{ game.description }}</p>
+
+    <p><strong>Жанры:</strong>
+        {% for genre in game.genre.all %}
+            {{ genre.name }}{% if not forloop.last %}, {% endif %}
+        {% empty %}
+            Нет жанров.
+        {% endfor %}
+    </p>
+
+    <p>
+        <strong>Разработчик:</strong>
+        {% if game.studio %}
+            <a href="{% url 'studio_detail' game.studio.id %}">{{ game.studio.name }}</a>
+        {% else %}
+            Не указан.
+        {% endif %}
+    </p>
+
+    <div class="reactions">
+        <form action="{% url 'add_reaction' game.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" name="reaction_type" value="like">👍</button>
+            <button type="submit" name="reaction_type" value="dislike">👎</button>
+        </form>
+    </div>
+
+    <h3>Отзывы пользователей:</h3>
+    <ul>
+        {% for review in game.reviews.all %}
+            <li>
+                <strong>{{ review.user.username }}</strong> ({{ review.created_at|date:"d.m.Y H:i" }}):<br>
+                {{ review.content }}
+                {% if request.user == review.user %}
+                    <a href="{% url 'review_update' review.id %}">Изменить</a>
+                    <a href="{% url 'review_delete' review.id %}">Удалить</a>
+                {% endif %}
+            </li>
+        {% empty %}
+            <p>Отзывов пока нет.</p>
+        {% endfor %}
+    </ul>
+
+    {% if user.is_authenticated %}
+        <h4>Добавить отзыв:</h4>
+        <form action="{% url 'review_create' game.id %}" method="post">
+            {% csrf_token %}
+            <textarea name="content" rows="3" cols="50" placeholder="Ваш отзыв..."></textarea><br>
+            <button type="submit">Отправить</button>
+        </form>
+
+        <p>
+            <a href="{% url 'create_report' game.id %}">Пожаловаться на эту игру</a>
+        </p>
+    {% else %}
+        <p>Чтобы оставить отзыв или пожаловаться — <a href="{% url 'login' %}">войдите в аккаунт</a>.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,191 @@
+/* Общие стили */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #111;
+    color: #fff;
+}
+
+/* Хедер */
+header {
+    background-color: #1f1f1f;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 28px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    list-style: none;
+}
+
+.nav-item {
+    display: inline-block;
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.nav-link img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Кнопка-logout */
+button.nav-link {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Контент */
+main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Футер */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #1f1f1f;
+    color: #aaa;
+    margin-top: 50px;
+}
+
+.footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.footer li {
+    margin: 5px 0;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icon {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    transition: 0.2s;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+}
+
+/* Карточки игр */
+.game-card {
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.game-card img {
+    width: 120px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.game-card h2 {
+    margin: 0 0 10px;
+    font-size: 20px;
+}
+
+.game-card p {
+    margin: 0;
+    color: #ccc;
+}
+
+.game-card:hover {
+    background-color: #292929;
+}
+
+/* Пагинация */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.pagination a, .pagination span {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 5px;
+    padding: 8px 14px;
+    background-color: #292929;
+    border-radius: 5px;
+}
+
+.pagination .current {
+    background-color: #555;
+}
+
+/* Формы */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea,
+form select {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #222;
+    color: #fff;
+}
+
+form button, input[type="submit"] {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover, input[type="submit"]:hover {
+    background-color: #555;
+}
+
+/* Заголовки */
+h1, h2, h3 {
+    color: #fff;
+}
+
+/* Сообщения об ошибках */
+.errorlist {
+    color: #f44336;
+    list-style: none;
+    padding: 0;
+}
+

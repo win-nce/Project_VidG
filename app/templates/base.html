@@ -14,26 +14,32 @@
             <a href="{% url 'index' %}" class="nav-link">GameVault</a>
         </h1>
     <nav>
-        <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-            <ul class="nav">
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-white">Каталог</a>
-                </li>
-                {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-white"><img src="{% static 'app/images/user.png' %}" alt="Профиль"></a>
-                </li>
-                <li class="nav-item">
-                    <button type="submit" class="nav-link text-white"><img src="{% static 'app/images/logout.png' %}" alt="Выход"></button>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-white"><img src="{% static 'app/images/user.png' %}" alt="Вход"></a>
-                </li>
-                {% endif %}
-            </ul>
-        </form>
+        <ul class="nav">
+            <li class="nav-item">
+                <a href="{% url 'index' %}" class="nav-link text-white">Каталог</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a href="{% url 'profile' %}" class="nav-link text-white">
+                    <img src="{% static 'app/images/user.png' %}" alt="Профиль">
+                </a>
+            </li>
+            <li class="nav-item">
+                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-link text-white" style="background:none; border:none; cursor:pointer;">
+                        <img src="{% static 'app/images/logout.png' %}" alt="Выход">
+                    </button>
+                </form>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a href="{% url 'login' %}" class="nav-link text-white">
+                    <img src="{% static 'app/images/user.png' %}" alt="Вход">
+                </a>
+            </li>
+            {% endif %}
+        </ul>
     </nav>
 </div>
 </header>
@@ -45,10 +51,22 @@
 </main>
 
 
-<footer class="">
-    <p class="">
-        хз нет пока что, что писать то.
-    </p>
+<footer class="footer">
+    <p>© 2025 GameVault PROJECT</p>
+    <p>Contact us:</p>
+    <ul>
+        <li>+998 97 123 45 67</li>
+        <li>+998 99 765 43 21</li>
+        <li>Email: gamevault_support@fakeuz.net</li>
+        <li>Офис: Tashkent, Amir Temur street 55, office 404</li>
+    </ul>
+    <p>Socials:</p>
+    <div class="social-icons">
+        <a href="#"><img src="{% static 'images/instagram.png' %}" alt="Instagram" class="social-icon"></a>
+        <a href="#"><img src="{% static 'images/telegram.png' %}" alt="Telegram" class="social-icon"></a>
+        <a href="#"><img src="{% static 'images/x.png' %}" alt="X" class="social-icon"></a>
+        <a href="#"><img src="{% static 'images/youtube.png' %}" alt="YouTube" class="social-icon"></a>
+    </div>
 </footer>
 
 

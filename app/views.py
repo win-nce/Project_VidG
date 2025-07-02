@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
@@ -24,18 +25,18 @@ class StudioListView(ListView):
     ordering = ["name"]
     paginate_by = 10
 
+class StudioDetailView(DetailView):
+    model = Studio
+    template_name = "app/studio_detail.html"
+    context_object_name = "studio"
+
+
 #------------------------------------------------------------------------------------------------------------------------
 # Просмотр игр с ревьюшками и реакциями
 class GameDetailView(DetailView):
     model = Game
     template_name = "game_detail.html"
     context_object_name = "game"
-
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.contrib.auth.views import LoginView, LogoutView
-from .forms import CustomUserCreationForm
-from django.contrib.auth.decorators import login_required
 
 
 #------------------------------------------------------------------------------------------------------------------------
@@ -106,7 +107,7 @@ class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 # Удаление ревью 
 class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Review
-    template_name = 'app/review_confirm_delete.html'
+    template_name = 'app/review_delete.html'
     context_object_name = 'review'
 
     def get_success_url(self):
