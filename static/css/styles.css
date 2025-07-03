@@ -7,6 +7,10 @@ body {
     color: #fff;
 }
 
+h1, h2, h3 {
+    color: #fff;
+}
+
 /* Хедер */
 header {
     background-color: #1f1f1f;
@@ -27,6 +31,8 @@ header h1 a {
     align-items: center;
     gap: 20px;
     list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .nav-item {
@@ -37,6 +43,7 @@ header h1 a {
     color: #fff;
     text-decoration: none;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .nav-link img {
@@ -44,15 +51,13 @@ header h1 a {
     height: 24px;
 }
 
-/* Кнопка-logout */
 button.nav-link {
     background: none;
     border: none;
-    cursor: pointer;
     padding: 0;
 }
 
-/* Контент */
+/* Основной контент */
 main {
     max-width: 1200px;
     margin: 30px auto;
@@ -86,63 +91,38 @@ main {
     width: 30px;
     height: 30px;
     margin: 0 5px;
-    transition: 0.2s;
+    transition: transform 0.2s ease;
 }
 
 .social-icon:hover {
     transform: scale(1.1);
 }
 
-/* Карточки игр */
-.game-card {
-    background-color: #1f1f1f;
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 20px;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    transition: 0.2s;
-}
-
-.game-card img {
-    width: 120px;
-    height: auto;
-    border-radius: 5px;
-}
-
-.game-card h2 {
-    margin: 0 0 10px;
-    font-size: 20px;
-}
-
-.game-card p {
-    margin: 0;
-    color: #ccc;
-}
-
-.game-card:hover {
-    background-color: #292929;
-}
-
 /* Пагинация */
 .pagination {
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 10px;
     margin: 30px 0;
 }
 
 .pagination a, .pagination span {
     color: #fff;
-    text-decoration: none;
-    margin: 0 5px;
-    padding: 8px 14px;
     background-color: #292929;
+    padding: 8px 14px;
     border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #574fcf;
 }
 
 .pagination .current {
     background-color: #555;
+    font-weight: bold;
 }
 
 /* Формы */
@@ -162,24 +142,34 @@ form select {
     border-radius: 5px;
     background-color: #222;
     color: #fff;
+    font-size: 16px;
+    resize: vertical;
 }
 
-form button, input[type="submit"] {
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
+form input:focus,
+form textarea:focus,
+form select:focus {
+    outline: none;
+    box-shadow: 0 0 5px #6c63ff;
+    background-color: #292929;
+}
+
+form button,
+input[type="submit"] {
+    padding: 12px;
+    background-color: #6c63ff;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-form button:hover, input[type="submit"]:hover {
-    background-color: #555;
-}
-
-/* Заголовки */
-h1, h2, h3 {
+    border-radius: 6px;
     color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover,
+input[type="submit"]:hover {
+    background-color: #574fcf;
 }
 
 /* Сообщения об ошибках */
@@ -189,3 +179,218 @@ h1, h2, h3 {
     padding: 0;
 }
 
+/* Общие контейнеры для страниц (авторизация, профиль, отчёты и т.д.) */
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.container h2, .container h3 {
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Списки */
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.review-list li,
+.studio-list li {
+    background-color: #292929;
+    padding: 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+.review-list li a,
+.studio-list li a {
+    color: #6c63ff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.review-list li a:hover,
+.studio-list li a:hover {
+    text-decoration: underline;
+}
+
+.studio-list li {
+    font-size: 18px;
+}
+
+.studio-country {
+    margin-left: 10px;
+    color: #aaa;
+    font-size: 14px;
+}
+
+/* Игровые карточки */
+.game-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.game-card {
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    width: 280px;
+    padding: 15px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.game-card:hover {
+    background-color: #292929;
+}
+
+.game-image img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.game-info h3 {
+    margin: 0 0 10px;
+    font-size: 20px;
+    color: #6c63ff;
+}
+
+.game-info h3 a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+.game-info h3 a:hover {
+    text-decoration: underline;
+}
+
+.game-info .description {
+    color: #ccc;
+    font-size: 14px;
+    min-height: 60px;
+}
+
+/* Специальные контейнеры */
+
+.auth-container,
+.profile-container,
+.report-container,
+.delete-container,
+.review-form-container,
+.studio-detail-container,
+.studio-list-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #1f1f1f;
+    border-radius: 8px;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.auth-container h2,
+.profile-container h2,
+.profile-container h3,
+.report-container h2,
+.delete-container h2,
+.review-form-container h2,
+.studio-detail-container h2,
+.studio-list-container h2 {
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.delete-container p {
+    margin-bottom: 30px;
+    font-size: 16px;
+    text-align: center;
+}
+
+button.btn-delete {
+    padding: 12px 25px;
+    background-color: #e53935;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-right: 15px;
+    transition: background-color 0.3s ease;
+}
+
+button.btn-delete:hover {
+    background-color: #b71c1c;
+}
+
+a.btn-cancel {
+    padding: 12px 25px;
+    background-color: #555;
+    border-radius: 6px;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+a.btn-cancel:hover {
+    background-color: #777;
+    color: #fff;
+}
+
+/* Дополнительные мелкие стили */
+.form-group {
+    margin-bottom: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #ccc;
+}
+
+.form-group input,
+textarea {
+    font-size: 16px;
+}
+
+/* Ссылки */
+.login-link,
+.report-container a,
+.review-form-container a {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.login-link a,
+.report-container a,
+.review-form-container a {
+    color: #6c63ff;
+    text-decoration: none;
+}
+
+.login-link a:hover,
+.report-container a:hover,
+.review-form-container a:hover {
+    text-decoration: underline;
+}

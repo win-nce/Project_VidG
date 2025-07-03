@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="profile-container">
+    <h2>Профиль пользователя {{ user.username }}</h2>
+
+    <h3>Ваши отзывы</h3>
+    {% if reviews %}
+        <ul class="review-list">
+            {% for review in reviews %}
+                <li>
+                    <strong>{{ review.game.name }}</strong> — {{ review.created_at|date:"d.m.Y H:i" }}<br>
+                    {{ review.content }}<br>
+                    <a href="{% url 'edit_review' review.id %}">Редактировать</a> |
+                    <a href="{% url 'delete_review' review.id %}">Удалить</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Пока нет отзывов.</p>
+    {% endif %}
+</div>
+{% endblock %}

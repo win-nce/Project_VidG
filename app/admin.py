@@ -13,10 +13,11 @@ class StudioAdmin(admin.ModelAdmin):
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
-    list_display = ('name', 'author')
-    search_fields = ('name', 'author__username')
-    list_filter = ('genre',)
+    list_display = ('name', 'author', 'studio')
+    search_fields = ('name', 'author__username', 'studio__name')
+    list_filter = ('genre', 'studio')
     filter_horizontal = ('genre',)  # для выбора жанров в админке
+    autocomplete_fields = ['studio']  # чтобы удобно искать студии
     readonly_fields = ('id',)
 
 @admin.register(Reaction)
@@ -36,4 +37,3 @@ class ReportAdmin(admin.ModelAdmin):
     list_display = ('user', 'game', 'theme', 'created_at')
     list_filter = ('theme', 'created_at')
     search_fields = ('user__username', 'game__name', 'description')
-

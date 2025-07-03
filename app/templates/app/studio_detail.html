@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="studio-detail-container">
+    <h2>{{ studio.name }}</h2>
+
+    {% if studio.country %}
+    <p><strong>Страна разработки:</strong> {{ studio.country }}</p>
+    {% endif %}
+
+    {% if studio.description %}
+    <div class="studio-description">
+        <h3>Описание студии</h3>
+        <p>{{ studio.description }}</p>
+    </div>
+    {% else %}
+    <p><em>Описание студии отсутствует.</em></p>
+    {% endif %}
+
+    <h3>Игры студии</h3>
+    {% if studio.game_set.all %}
+        <ul class="studio-games-list">
+        {% for game in studio.game_set.all %}
+            <li>
+                <a href="{% url 'game_detail' game.id %}">{{ game.name }}</a>
+            </li>
+        {% empty %}
+            <li>Игры не найдены.</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Игры не найдены.</p>
+    {% endif %}
+
+    <p><a href="{% url 'studio_list' %}">&larr; Вернуться к списку студий</a></p>
+</div>
+{% endblock %}
