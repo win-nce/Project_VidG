@@ -47,8 +47,8 @@
                 <strong>{{ review.user.username }}</strong> ({{ review.created_at|date:"d.m.Y H:i" }}):<br>
                 {{ review.content }}
                 {% if request.user == review.user %}
-                    <a href="{% url 'review_update' review.id %}">Изменить</a>
-                    <a href="{% url 'review_delete' review.id %}">Удалить</a>
+                    <a href="{% url 'edit_review' review.id %}">Изменить</a>
+                    <a href="{% url 'delete_review' review.id %}">Удалить</a>
                 {% endif %}
             </li>
         {% empty %}
@@ -58,7 +58,7 @@
 
     {% if user.is_authenticated %}
         <h4>Добавить отзыв:</h4>
-        <form action="{% url 'review_create' game.id %}" method="post">
+        <form action="{% url 'add_review' game.id %}" method="post">
             {% csrf_token %}
             <textarea name="content" rows="3" cols="50" placeholder="Ваш отзыв..."></textarea><br>
             <button type="submit">Отправить</button>

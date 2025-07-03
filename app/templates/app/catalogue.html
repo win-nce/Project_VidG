@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="catalogue-container">
+    <a href="{% url 'studio_list' %}" class="catalogue-card studios"
+       style="background-image: url('{% static 'images/studio_bg.png' %}');">
+        Studios
+    </a>
+    <a href="{% url 'index' %}" class="catalogue-card games"
+       style="background-image: url('{% static 'images/game_bg.png' %}');">
+        Games
+    </a>
+</div>
+{% endblock %}

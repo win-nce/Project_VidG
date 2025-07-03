@@ -8,41 +8,52 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <header class="">
-    <div class="">
-        <h1 class="">
-            <a href="{% url 'index' %}" class="nav-link">GameVault</a>
-        </h1>
-    <nav>
-        <ul class="nav">
-            <li class="nav-item">
-                <a href="{% url 'index' %}" class="nav-link text-white">Каталог</a>
-            </li>
-            {% if user.is_authenticated %}
-            <li class="nav-item">
-                <a href="{% url 'profile' %}" class="nav-link text-white">
-                    <img src="{% static 'app/images/user.png' %}" alt="Профиль">
-                </a>
-            </li>
-            <li class="nav-item">
-                <form action="{% url 'logout' %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="nav-link text-white" style="background:none; border:none; cursor:pointer;">
-                        <img src="{% static 'app/images/logout.png' %}" alt="Выход">
-                    </button>
-                </form>
-            </li>
-            {% else %}
-            <li class="nav-item">
-                <a href="{% url 'login' %}" class="nav-link text-white">
-                    <img src="{% static 'app/images/user.png' %}" alt="Вход">
-                </a>
-            </li>
-            {% endif %}
-        </ul>
-    </nav>
-</div>
+    <header>
+    <div class="navbar">
+        <div class="navbar-left">
+            <h1>
+                <a href="{% url 'index' %}" class="nav-link">GameVault</a>
+            </h1>
+        </div>
+
+        <nav class="navbar-right">
+        <form action="{% url 'search' %}" method="get" class="search-form">
+            <input type="text" name="q" placeholder="Поиск..." class="search-input">
+            <button type="submit" class="search-button">
+                <img src="{% static 'images/search.png' %}" alt="Поиск">
+            </button>
+        </form>
+            <ul class="nav">
+                <li class="nav-item">
+                    <a href="{% url 'catalogue' %}" class="nav-link text-white">Каталог</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a href="{% url 'profile' %}" class="nav-link text-white">
+                        <img src="{% static 'app/images/user.png' %}" alt="Профиль">
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="nav-link text-white" style="background:none; border:none; cursor:pointer;">
+                            <img src="{% static 'app/images/logout.png' %}" alt="Выход">
+                        </button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link text-white">
+                        <img src="{% static 'app/images/user.png' %}" alt="Вход">
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 </header>
+
     
 <main>
     {% block main %}

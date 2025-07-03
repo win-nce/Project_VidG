@@ -14,7 +14,7 @@
             </div>
             <div class="game-info">
                 <h3><a href="{% url 'game_detail' game.id %}">{{ game.name }}</a></h3>
-                <p class="description">{{ game.description|truncatewords:30 }}</p> {% comment %} до 30 слов видно в карточке {% endcomment %}
+                <p class="description">{{ game.description|truncatewords:15 }}</p> {% comment %} до 30 слов видно в карточке {% endcomment %}
             </div>
         </div>
     {% empty %}

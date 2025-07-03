@@ -9,18 +9,38 @@ from app.models import Game, Studio, Reaction, Review
 from app.forms import ReportForm, CustomUserCreationForm
 
 # Главняа
-class IndexView(ListView):
+class GameListView(ListView):
     model = Game
-    template_name = "game_list.html"
+    template_name = "app/game_list.html"
     context_object_name = "games" # Задали перемную для next usage in templates
     ordering = ["-id"] # по убыванию
     paginate_by = 10
+
+
+# Каталог с выбором разделов
+class CatalogueView(ListView):
+    template_name = "app/catalogue.html"
+    model = Game
+    context_object_name = 'games'
+    
+    
+# Поиск
+def search(request):
+    query = request.GET.get('q')  # параметр который мы забираем из /search/?q=doom
+    games = Game.objects.filter(name__icontains=query) if query else [] # если нашел (name__icontains=query) то выведет
+    studios = Studio.objects.filter(name__icontains=query) if query else [] # если не нашел то пустой список (if query else []) 
+
+    return render(request, 'app/search_results.html', {
+        'query': query,
+        'games': games,
+        'studios': studios
+    })
 
 #------------------------------------------------------------------------------------------------------------------------
 # Просмотр инфы студий и разрабов
 class StudioListView(ListView):
     model = Studio
-    template_name = "studio_list.html"
+    template_name = "app/studio_list.html"
     context_object_name = "studios"
     ordering = ["name"]
     paginate_by = 10
@@ -35,7 +55,7 @@ class StudioDetailView(DetailView):
 # Просмотр игр с ревьюшками и реакциями
 class GameDetailView(DetailView):
     model = Game
-    template_name = "game_detail.html"
+    template_name = "app/game_detail.html"
     context_object_name = "game"
 
 
@@ -82,7 +102,7 @@ def add_reaction(request, game_id):
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
     fields = ['content']
-    template_name = 'review_form.html'
+    template_name = 'app/review_form.html'
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -90,13 +110,18 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy('game_detail', kwargs={'pk': self.kwargs['game_id']})
+        if self.object.game:
+            return reverse_lazy('game_detail', kwargs={'pk': self.object.game.id})
+        else:
+            return reverse_lazy('index')
 
+    def test_func(self):
+        return self.request.user == self.get_object().user
 # Редактирование своего ревью
 class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
     fields = ['content']
-    template_name = 'review_form.html'
+    template_name = 'app/review_form.html'
 
     def get_success_url(self):
         return reverse_lazy('game_detail', kwargs={'pk': self.object.game.id})
@@ -143,7 +168,7 @@ def create_report(request, game_id):
 # Пользовательский Профиль
 class ProfileView(LoginRequiredMixin, ListView):
     model = Review
-    template_name = 'profile.html'
+    template_name = 'app/profile.html'
     context_object_name = 'reviews'
 
     def get_queryset(self):

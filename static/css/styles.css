@@ -15,18 +15,35 @@ h1, h2, h3 {
 header {
     background-color: #1f1f1f;
     padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+header.sticky-shadow {
+    background-color: rgba(31, 31, 31, 0.85);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-header h1 a {
+.navbar-left h1 {
+    margin: 0;
+}
+
+.navbar-left a {
     color: #fff;
     text-decoration: none;
     font-size: 28px;
+    font-weight: bold;
 }
 
-.nav {
+.navbar-right .nav {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -35,18 +52,18 @@ header h1 a {
     margin: 0;
 }
 
-.nav-item {
+.navbar-right .nav-item {
     display: inline-block;
 }
 
-.nav-link {
+.navbar-right .nav-link {
     color: #fff;
     text-decoration: none;
     font-size: 16px;
     cursor: pointer;
 }
 
-.nav-link img {
+.navbar-right .nav-link img {
     width: 24px;
     height: 24px;
 }
@@ -55,6 +72,7 @@ button.nav-link {
     background: none;
     border: none;
     padding: 0;
+    cursor: pointer;
 }
 
 /* Основной контент */
@@ -63,6 +81,38 @@ main {
     margin: 30px auto;
     padding: 0 20px;
 }
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 20px;
+}
+
+.search-input {
+    padding: 6px 10px;
+    background-color: #222;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.search-input::placeholder {
+    color: #aaa;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.search-button img {
+    width: 22px;
+    height: 22px;
+    filter: invert(1);
+}
+
 
 /* Футер */
 .footer {
@@ -126,7 +176,7 @@ main {
 }
 
 /* Формы */
-form {
+.auth-form, .review-form, .report-form {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -394,3 +444,34 @@ textarea {
 .review-form-container a:hover {
     text-decoration: underline;
 }
+
+
+.catalogue-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.catalogue-card {
+    flex: 1;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 36px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.catalogue-card:hover {
+    transform: scale(1.03);
+}
+
+
+

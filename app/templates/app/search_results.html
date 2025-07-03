@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="container">
+    <h2>Результаты поиска: "{{ query }}"</h2>
+
+    {% if games %}
+        <h3>Игры:</h3>
+        <ul class="game-list">
+            {% for game in games %}
+                <li class="game-card">
+                    <a href="{% url 'game_detail' game.pk %}">
+                        <div class="game-image">
+                            <img src="{{ game.image.url }}" alt="{{ game.name }}">
+                        </div>
+                        <h3>{{ game.name }}</h3>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if studios %}
+        <h3>Студии:</h3>
+        <ul class="studio-list">
+            {% for studio in studios %}
+                <li>
+                    <a href="{% url 'studio_detail' studio.pk %}">{{ studio.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if not games and not studios %}
+        <p>Ничего не найдено.</p>
+    {% endif %}
+</div>
+{% endblock %}
